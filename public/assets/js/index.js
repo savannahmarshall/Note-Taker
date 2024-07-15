@@ -12,7 +12,7 @@ if (window.location.pathname === '/notes') {
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
   clearBtn = document.querySelector('.clear-btn');
-  noteList = document.querySelectorAll('.list-container .list-group');
+  noteList = document.querySelectorAll('.list-group'); //adjusted the query selector
 }
 
 // Show an element
@@ -28,6 +28,7 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
+// fetch notes from the backend
 const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
@@ -36,6 +37,7 @@ const getNotes = () =>
     }
   });
 
+// save a new note to the backend
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
@@ -45,6 +47,7 @@ const saveNote = (note) =>
     body: JSON.stringify(note)
   });
 
+// delete a note from the backend
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -53,6 +56,7 @@ const deleteNote = (id) =>
     }
   });
 
+// render the active note
 const renderActiveNote = () => {
   hide(saveNoteBtn);
   hide(clearBtn);
@@ -72,6 +76,7 @@ const renderActiveNote = () => {
   }
 };
 
+// handle saving a new note
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
@@ -131,7 +136,7 @@ const handleRenderBtns = () => {
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
   if (window.location.pathname === '/notes') {
-    noteList.forEach((el) => (el.innerHTML = ''));
+    noteList.innerHTML = ''; // Clear note list
   }
 
   let noteListItems = [];
