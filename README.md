@@ -1,7 +1,7 @@
 # Note-Taker
 
 ## Description
-This application is used to write and save notes by using and Express.js backend.
+This application is used to write and save notes.
 
 ### Key Learnings:
 * **Express:** Utilize Express.js and nodejs simultaneously.
