@@ -40,8 +40,8 @@ To use this application, follow these steps:
 3. **Run the Application:** Initialize the webpage by typing:
    * node index.js
    * hold down control and click on  http://localhost:3000
-4. **View Application in Broswer** You should now see the first page of the application open in your browser. Select the "Get Started" button to initialize the second page of the application.
-5. **Enter your Note Data** Enter your desired title and note text in the designated areas and select "save note" in the upper right hand corner.
+4. **View Application in Broswer:** You should now see the first page of the application open in your browser. Select the "Get Started" button to initialize the second page of the application.
+5. **Enter your Note Data:** Enter your desired title and note text in the designated areas and select "save note" in the upper right hand corner.
 
 You should now see your note added on the left hand side of the page with the title, note text and delete button.
 
