@@ -4,7 +4,7 @@
 This application is used to write and save notes by using and Express.js backend.
 
 ### Key Learnings:
-* **Express** Utilize Express.js and nodejs simultaneously.
+* **Express:** Utilize Express.js and nodejs simultaneously.
 * **2** 
 * **3** 
 * **4** 
