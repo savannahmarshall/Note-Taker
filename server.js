@@ -1,36 +1,44 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-const notesFilePath = path.join(__dirname, 'db', 'notes.json');
+// Helper function to get the next ID
+const getNextId = (notes) => {
+  const maxId = notes.reduce((max, note) => Math.max(max, note.id), 0);
+  return maxId + 1; // Incrementing ID
+};
 
+// API route to get all notes
 app.get('/api/notes', (req, res) => {
-  fs.readFile(notesFilePath, 'utf8', (err, data) => {
+  fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
     if (err) {
+      console.error(err);
       return res.status(500).json({ error: 'Failed to read notes' });
     }
     res.json(JSON.parse(data));
   });
 });
 
+// API route to add a new note
 app.post('/api/notes', (req, res) => {
-  const newNote = req.body;
-
-  fs.readFile(notesFilePath, 'utf8', (err, data) => {
+  fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
     if (err) {
+      console.error(err);
       return res.status(500).json({ error: 'Failed to read notes' });
     }
     const notes = JSON.parse(data);
-    newNote.id = notes.length ? notes[notes.length - 1].id + 1 : 1;
+    const newNote = { id: getNextId(notes), ...req.body }; // Use next ID
     notes.push(newNote);
-
-    fs.writeFile(notesFilePath, JSON.stringify(notes, null, 2), (err) => {
+    fs.writeFile(path.join(__dirname, 'db/db.json'), JSON.stringify(notes, null, 2), (err) => {
       if (err) {
+        console.error(err);
         return res.status(500).json({ error: 'Failed to save note' });
       }
       res.json(newNote);
@@ -38,25 +46,36 @@ app.post('/api/notes', (req, res) => {
   });
 });
 
+// API route to delete a note
 app.delete('/api/notes/:id', (req, res) => {
-  const noteId = parseInt(req.params.id, 10);
-
-  fs.readFile(notesFilePath, 'utf8', (err, data) => {
+  const noteId = parseInt(req.params.id, 10); // Convert ID to number
+  fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
     if (err) {
+      console.error(err);
       return res.status(500).json({ error: 'Failed to read notes' });
     }
-    let notes = JSON.parse(data);
-    notes = notes.filter(note => note.id !== noteId);
-
-    fs.writeFile(notesFilePath, JSON.stringify(notes, null, 2), (err) => {
+    const notes = JSON.parse(data);
+    const filteredNotes = notes.filter((note) => note.id !== noteId);
+    fs.writeFile(path.join(__dirname, 'db/db.json'), JSON.stringify(filteredNotes, null, 2), (err) => {
       if (err) {
+        console.error(err);
         return res.status(500).json({ error: 'Failed to delete note' });
       }
-      res.json({ id: noteId });
+      res.json({ message: 'Note deleted' });
     });
   });
 });
 
+// HTML route to serve the notes page
+app.get('/notes', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/notes.html'));
+});
+
+// HTML route to serve the index page
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public/index.html'));
+});
+
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });

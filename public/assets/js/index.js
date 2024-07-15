@@ -12,7 +12,7 @@ if (window.location.pathname === '/notes') {
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
   clearBtn = document.querySelector('.clear-btn');
-  noteList = document.querySelectorAll('.list-group'); //adjusted the query selector
+  noteList = document.querySelectorAll('.list-group'); // Adjusted the query selector
 }
 
 // Show an element
@@ -28,7 +28,10 @@ const hide = (elem) => {
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
 
-// fetch notes from the backend
+// Unique ID generator function
+const generateUniqueId = () => Date.now();
+
+// Fetch notes from the backend
 const getNotes = () =>
   fetch('/api/notes', {
     method: 'GET',
@@ -37,7 +40,7 @@ const getNotes = () =>
     }
   });
 
-// save a new note to the backend
+// Save a new note to the backend
 const saveNote = (note) =>
   fetch('/api/notes', {
     method: 'POST',
@@ -47,7 +50,7 @@ const saveNote = (note) =>
     body: JSON.stringify(note)
   });
 
-// delete a note from the backend
+// Delete a note from the backend
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: 'DELETE',
@@ -56,7 +59,7 @@ const deleteNote = (id) =>
     }
   });
 
-// render the active note
+// Render the active note
 const renderActiveNote = () => {
   hide(saveNoteBtn);
   hide(clearBtn);
@@ -76,9 +79,10 @@ const renderActiveNote = () => {
   }
 };
 
-// handle saving a new note
+// Handle saving a new note
 const handleNoteSave = () => {
   const newNote = {
+    id: generateUniqueId(), // Generate a new ID
     title: noteTitle.value,
     text: noteText.value
   };
@@ -90,7 +94,6 @@ const handleNoteSave = () => {
 
 // Delete the clicked note
 const handleNoteDelete = (e) => {
-  // Prevents the click listener for the list from being called when the button inside of it is clicked
   e.stopPropagation();
 
   const note = e.target;
@@ -113,7 +116,7 @@ const handleNoteView = (e) => {
   renderActiveNote();
 };
 
-// Sets the activeNote to and empty object and allows the user to enter a new note
+// Sets the activeNote to an empty object and allows the user to enter a new note
 const handleNewNoteView = (e) => {
   activeNote = {};
   show(clearBtn);
@@ -176,8 +179,7 @@ const renderNoteList = async (notes) => {
 
   jsonNotes.forEach((note) => {
     const li = createLi(note.title);
-    li.dataset.note = JSON.stringify(note);
-
+    li.dataset.note = JSON.stringify(note); // Ensure note has an `id`
     noteListItems.push(li);
   });
 
