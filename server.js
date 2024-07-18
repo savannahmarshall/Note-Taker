@@ -50,13 +50,13 @@ app.post('/api/notes', (req, res) => {
 app.delete('/api/notes/:id', (req, res) => {
   const noteId = req.params.id.toString(); // Parse noteId as a string
 
-  fs.readFile(path.join(__dirname, 'db.json'), 'utf8', (err, data) => {
+  fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
     if (err) return res.status(500).send(err);
 
     let notes = JSON.parse(data);
     notes = notes.filter(note => note.id !== noteId); // Compare as strings
 
-    fs.writeFile(path.join(__dirname, 'db.json'), JSON.stringify(notes), (err) => {
+    fs.writeFile(path.join(__dirname, 'db/db.json'), JSON.stringify(notes), (err) => {
       if (err) return res.status(500).send(err);
       res.json({ message: 'Note deleted successfully' });
     });
