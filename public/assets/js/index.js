@@ -13,7 +13,7 @@ if (window.location.pathname === '/notes') {
   saveNoteBtn = document.querySelector('.save-note');
   newNoteBtn = document.querySelector('.new-note');
   clearBtn = document.querySelector('.clear-btn');
-  noteList = document.querySelectorAll('.list-container .list-group');
+  noteList = document.querySelector('.list-group');
 }
 
 // Show an element
@@ -95,29 +95,33 @@ const handleNoteSave = () => {
 
 // Delete the clicked note
 const handleNoteDelete = (e) => {
-    e.stopPropagation();
-  
-    const note = e.target;
-    const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+  e.stopPropagation();
 
-    console.log("Deleting note ID:", noteId); 
-  
-    // Check if the active note is being deleted
-    if (activeNote.id === noteId) {
+  const note = e.target.closest('.note'); // Find the closest parent element with the class 'note'
+  if (!note) {
+      return; // Exit function if the note element is not found
+  }
+
+  const noteId = JSON.parse(note.getAttribute('data-note')).id;
+
+  console.log("Deleting note ID:", noteId);
+
+  // Check if the active note is being deleted
+  if (activeNote.id === noteId) {
       activeNote = {}; // Clear active note
-    }
-  
-    // Call delete function
-    deleteNote(noteId)
+  }
+
+  // Call delete function
+  deleteNote(noteId)
       .then(() => {
-        // Fetch and render updated notes
-        getAndRenderNotes();
-        renderActiveNote(); // Update the UI
+          // Fetch and render updated notes
+          getAndRenderNotes();
+          renderActiveNote(); // Update the UI
       })
       .catch((error) => {
-        console.error('Error deleting note:', error);
+          console.error('Error deleting note:', error);
       });
-  };
+};
 
 // Sets the activeNote and displays it
 const handleNoteView = (e) => {
