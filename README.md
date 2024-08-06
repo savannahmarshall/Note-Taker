@@ -48,9 +48,12 @@ You should now see your note added on the left hand side of the page with the ti
 **Please click [here]() to view a demo on how to use this application.**
 
 
-![screenshot of landing page]()
+![screenshot of landing page](https://github.com/savannahmarshall/Note-Taker/blob/main/public/assets/note-taker-2.png)
+
+![screenshot of save and clear form features present](https://github.com/savannahmarshall/Note-Taker/blob/main/public/assets/note-taker-3.png)
 
 ![screenshot of note examples](https://github.com/savannahmarshall/Note-Taker/blob/main/public/assets/note-taker-1.png)
+
 
 
 ## Contributing
