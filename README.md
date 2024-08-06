@@ -1,7 +1,7 @@
 # Note-Taker
 
 ## Description
-This web-based application is used to write and save notes so that the user can organize their thoughts and keep track of tasks they need to complete. I was given starter code for this application.
+This web-based application allows users to write and save notes, helping them organize their thoughts and manage tasks. I built this application using starter code provided for the challenge.
 
 ### Key Learnings:
 * **Express.js:** Developed a deeper understanding of using Express.js alongside Node.js.
