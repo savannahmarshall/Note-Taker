@@ -4,15 +4,15 @@
 This web-based application is used to write and save notes so that the user can organize their thoughts and keep track of tasks they need to complete. I was given starter code for this application.
 
 ### Key Learnings:
-* **Express:** Utilized Express.js and Node.js simultaneously.
-* **Delete Request:** Utilized delete request and fetch to ensure functionality of the delete button is working properly to remove notes from the page.
-* **Get and Post Requests:** Use both get and post requests to return and read the correct files.
+* **Express.js:** Developed a deeper understanding of using Express.js alongside Node.js.
+* **DELETE Request:** Implemented DELETE requests using fetch to ensure the delete button works correctly, enabling users to remove notes from the list.
+* **GET and POST Requests:** Utilized GET and POST requests to retrieve and save data, ensuring the application functions smoothly.
 
 ### Challenges Faced:
-* **Delete Functionality:** I struggled with getting the delete functionality to work at first, but was able to figure it out in the end by debugging.
-* **Starter Code:** Working from starter code and trying to determine where the issues were was difficult because I did not write the original code.
+* **Delete Functionality:** Initially, I encountered difficulties with the delete functionality, but after thorough debugging, I successfully resolved the issue.
+* **Working with Starter Code:** Understanding and modifying code I didn’t originally write was challenging, but it provided valuable experience in debugging and adapting existing code.
 
-By tackling these challenges, I enhanced my understanding of creating an application using and Express.js backend, 
+Through these challenges, I enhanced my skills in creating applications with an Express.js backend. 
 
 ## Table of Contents
   
@@ -24,7 +24,7 @@ By tackling these challenges, I enhanced my understanding of creating an applica
 - [Questions](#questions)
 
 ## Installation
-To use this application, you must install [Node.js](https://nodejs.org/en).
+Ensure you have Node.js installed. If not, download and install it from the [official Node.js website](https://nodejs.org/en).
 
 ## Usage
 
@@ -37,11 +37,9 @@ To use this application, follow these steps:
    * npm install express
 3. **Run the Application:** Initialize the webpage by typing:
    * node server.js
-   * hold down control and click on  http://localhost:3000
-4. **View Application in Broswer:** You should now see the first page of the application open in your browser. Select the "Get Started" button to initialize the second page of the application.
-5. **Enter your Note Data:** Enter your desired title and note text in the designated areas and select "save note" in the upper right hand corner.
-
-You should now see your note added on the left hand side of the page with the title, note text and delete button. To remove a note from this section, select the red trash can.
+     Then, hold Ctrl and click on http://localhost:3000 to open the application in your browser.
+4. **View Application in Broswer:** The application will open on the homepage. Click the "Get Started" button to access the note-taking interface.
+5. **Enter your Note Data:** Enter your note title and content in the designated fields, then click "Save Note" in the upper-right corner. Your note will appear on the left side of the page. To delete a note, simply click the red trash can icon next to it.
 
 ![screenshot of landing page](https://github.com/savannahmarshall/Note-Taker/blob/main/public/assets/note-taker-2.png)
 
