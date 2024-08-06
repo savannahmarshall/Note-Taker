@@ -67,12 +67,13 @@ const renderActiveNote = () => {
   hide(saveNoteBtn);
   hide(clearBtn);
 
-  if (activeNote.id) {
+  // Check if activeNote is defined and has an id
+  if (activeNote && activeNote.id) {
     show(newNoteBtn);
     noteTitle.setAttribute('readonly', true);
     noteText.setAttribute('readonly', true);
-    noteTitle.value = activeNote.title;
-    noteText.value = activeNote.text;
+    noteTitle.value = activeNote.title || ''; // Set value to an empty string if title is undefined
+    noteText.value = activeNote.text || '';   // Set value to an empty string if text is undefined
   } else {
     hide(newNoteBtn);
     noteTitle.removeAttribute('readonly');
@@ -98,12 +99,13 @@ const handleNoteSave = () => {
 // Delete the clicked note
 const handleNoteDelete = (e) => {
   e.stopPropagation();
-  const note = e.target;
-  const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+  const noteId = JSON.parse(e.target.closest('.list-group-item').getAttribute('data-note')).id;
   console.log("Deleting note ID:", noteId);
+  
   if (activeNote.id === noteId) {
     activeNote = {};
   }
+
   deleteNote(noteId)
     .then(() => {
       getAndRenderNotes();

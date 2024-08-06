@@ -48,22 +48,32 @@ app.post('/api/notes', (req, res) => {
 
 // API route to delete a note
 app.delete('/api/notes/:id', (req, res) => {
-  const noteId = parseInt(req.params.id, 10);
+  const noteId = parseInt(req.params.id, 10); // Parse noteId as an integer
+  console.log('Attempting to delete note with ID:', noteId);
 
-  fs.readFile(dbFilePath, 'utf8', (err, data) => {
-    if (err) return res.status(500).send(err);
-
-    let notes = JSON.parse(data);
-    const noteExists = notes.some(note => note.id === noteId);
-
-    if (!noteExists) {
-      return res.status(404).json({ error: 'Note not found' });
+  fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading file:', err);
+      return res.status(500).json({ error: 'Failed to read notes file.' });
     }
 
+    let notes = JSON.parse(data);
+    console.log('Notes before deletion:', notes);
+
+    const originalLength = notes.length;
     notes = notes.filter(note => note.id !== noteId);
 
-    fs.writeFile(dbFilePath, JSON.stringify(notes, null, 2), (err) => {
-      if (err) return res.status(500).send(err);
+    if (notes.length === originalLength) {
+      console.log('No note found with ID:', noteId);
+      return res.status(404).json({ error: 'Note not found.' });
+    }
+
+    fs.writeFile(path.join(__dirname, 'db/db.json'), JSON.stringify(notes, null, 2), (err) => {
+      if (err) {
+        console.error('Error writing file:', err);
+        return res.status(500).json({ error: 'Failed to save notes file.' });
+      }
+      console.log('Note successfully deleted.');
       res.json({ message: 'Note deleted successfully' });
     });
   });
