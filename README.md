@@ -37,8 +37,8 @@ To use this application, follow these steps:
    * npm install express
 3. **Run the Application:** Initialize the webpage by typing:
    * node server.js
-     Then, hold Ctrl and click on http://localhost:3000 to open the application in your browser.
-4. **View Application in Broswer:** The application will open on the homepage. Click the "Get Started" button to access the note-taking interface.
+   * hold Ctrl and click on http://localhost:3000 to open the application in your browser.
+4. **View Application in Browser:** The application will open on the homepage. Click the "Get Started" button to access the note-taking interface.
 5. **Enter your Note Data:** Enter your note title and content in the designated fields, then click "Save Note" in the upper-right corner. Your note will appear on the left side of the page. To delete a note, simply click the red trash can icon next to it.
 
 ![screenshot of landing page](https://github.com/savannahmarshall/Note-Taker/blob/main/public/assets/note-taker-2.png)
