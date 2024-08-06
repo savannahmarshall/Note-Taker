@@ -50,7 +50,7 @@ You should now see your note added on the left hand side of the page with the ti
 
 ![screenshot of landing page]()
 
-![screenshot of note examples]()
+![screenshot of note examples](https://github.com/savannahmarshall/Note-Taker/blob/main/public/assets/note-taker-1.png)
 
 
 ## Contributing
