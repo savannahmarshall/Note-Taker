@@ -48,15 +48,21 @@ app.post('/api/notes', (req, res) => {
 
 // API route to delete a note
 app.delete('/api/notes/:id', (req, res) => {
-  const noteId = req.params.id.toString(); // Parse noteId as a string
+  const noteId = parseInt(req.params.id, 10);
 
-  fs.readFile(path.join(__dirname, 'db/db.json'), 'utf8', (err, data) => {
+  fs.readFile(dbFilePath, 'utf8', (err, data) => {
     if (err) return res.status(500).send(err);
 
     let notes = JSON.parse(data);
-    notes = notes.filter(note => note.id !== noteId); // Compare as strings
+    const noteExists = notes.some(note => note.id === noteId);
 
-    fs.writeFile(path.join(__dirname, 'db/db.json'), JSON.stringify(notes), (err) => {
+    if (!noteExists) {
+      return res.status(404).json({ error: 'Note not found' });
+    }
+
+    notes = notes.filter(note => note.id !== noteId);
+
+    fs.writeFile(dbFilePath, JSON.stringify(notes, null, 2), (err) => {
       if (err) return res.status(500).send(err);
       res.json({ message: 'Note deleted successfully' });
     });

@@ -52,13 +52,15 @@ const saveNote = (note) =>
   });
 
 // Delete a note from the backend
-const deleteNote = (id) =>
-  fetch(`/api/notes/${id}`, {
+const deleteNote = (id) => {
+  console.log('Deleting note with ID:', id); // Log the ID
+  return fetch(`/api/notes/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json'
     }
   });
+};
 
 // Render the active note
 const renderActiveNote = () => {
