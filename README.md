@@ -52,7 +52,7 @@ To use this application, follow these steps:
 ## Contributing
 * [JavaScript](https://www.javascript.com/)
 * [Node.js](https://nodejs.org/en)
-* [Express](https://expressjs.com/)
+* [Express.js](https://expressjs.com/)
 
 ## License
 This project was created using the [MIT License](https://opensource.org/license/MIT).
